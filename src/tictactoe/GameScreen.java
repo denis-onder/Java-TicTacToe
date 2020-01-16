@@ -2,6 +2,7 @@ package tictactoe;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 public class GameScreen extends JFrame {
 
@@ -17,11 +18,23 @@ public class GameScreen extends JFrame {
         drawButtons();
 
         add(root);
+
     }
 
     private void drawButtons() {
         for (int i = 0; i < NUMBER_OF_BUTTONS; i++) {
-            root.add(new Button());
+            // Create new JButton
+            JButton btn = new JButton("ID: " + (i+1));
+            // Attach click listener to button
+            btn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    GameLogic.handleClick(btn);
+                }
+            });
+            // Add button to grid
+            root.add(btn);
         }
     }
+
 }
