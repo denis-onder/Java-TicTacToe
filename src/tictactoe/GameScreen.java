@@ -24,7 +24,11 @@ public class GameScreen extends JFrame {
     private void drawButtons() {
         for (int i = 0; i < NUMBER_OF_BUTTONS; i++) {
             // Create new JButton
-            JButton btn = new JButton("ID: " + (i+1));
+            JButton btn = new JButton();
+            // Styles
+            btn.setBackground(root.getBackground());
+            btn.setBorder(BorderFactory.createLineBorder(Color.white));
+            btn.setForeground(Color.white);
             // Attach click listener to button
             btn.addActionListener(new ActionListener() {
                 @Override
