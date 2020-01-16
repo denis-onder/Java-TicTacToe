@@ -3,6 +3,7 @@ package tictactoe;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
 
 public class GameScreen extends JFrame {
 
@@ -34,26 +35,36 @@ public class GameScreen extends JFrame {
             btn.setForeground(Color.white);
             btn.setFont(new Font("Arial", Font.PLAIN, 40));
             // Attach click listener to button
-            int finalI = i;
-            btn.addActionListener(new ActionListener() {
+            int finalI = i; // Passing down the index into the scope of the listener
+            ActionListener listener = new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     handleClick(btn, finalI);
+                    // Disable the button from being clicked again
+                    btn.removeActionListener(this);
                 }
-            });
+            };
+            btn.addActionListener(listener);
             // Add button to grid and the buttons array
             root.add(btn);
             buttons[i] = btn;
         }
     }
+//    private void removeButtonFromArray(int index) {
+//        // Create a new array, in which the current index will be excluded
+//        for(int i = index; i < buttons.length -1; i++){
+//            buttons[i] = buttons[i + 1];
+//        }
+//        System.out.println(buttons.length);
+//    }
     private void computerMove() {
-        for (JButton btn:buttons) {
-            System.out.println(btn);
-        }
+        int randomIndex = (int) (Math.random() * buttons.length);
+        buttons[randomIndex].setText("O");
     }
     private void handleClick(JButton btn, int index) {
         btn.setText("X");
-        System.out.println(index);
-//        computerMove();
+
+//        removeButtonFromArray(index);
+        computerMove();
     }
 }
